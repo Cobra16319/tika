@@ -1,0 +1,18 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin variable1.dkr.ecr.us-west-2.amazonaws.com
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...          
+      - docker build -t tikatextract .
+      - docker tag tikatextract:latest variable1.dkr.ecr.us-west-2.amazonaws.com/tikatextract:latest
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image to IWC ECR...
+      - docker push $variable1.dkr.ecr.us-west-2.amazonaws.com/tikatextract:latest
