@@ -1,0 +1,4 @@
+def textract.py.lambda_handler(event, context): 
+    ...
+    
+    return None
