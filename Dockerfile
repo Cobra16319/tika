@@ -52,6 +52,15 @@ COPY /* ${FUNCTION_DIR}
 
 ADD requirements.txt ${FUNCTION_DIR}
 
+# Tuning adjustments for Tika
+
+ENV TIKA_STARTUP_SLEEP=10
+
+ENV TIKA_STARTUP_MAX_RETRY=4
+
+
+
+
 # Install Lambda Runtime Interface Client for Python
 
 RUN python${RUNTIME_VERSION} -m pip install awslambdaric --target ${FUNCTION_DIR}
